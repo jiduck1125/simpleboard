@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+    <footer th:fragment="footer" th:align="center">
+        &copy; <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2022</span>
+        <span>jiduck</span>
+
+        <script th:src="@{/lib/bootstrap-5.2.3-dist/js/bootstrap.bundle.js}"></script>
+    </footer>
+
+</body>
+</html>

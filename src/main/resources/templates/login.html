@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <div th:replace="~{fragments/header :: header}"></div>
+        <link th:href="@{/css/login.css}" rel="stylesheet">
+    </head>
+    <body class="text-center">
+        <main class="form-signin w-100 m-auto">
+            <form th:action="@{/login}" method="post">
+                <img class="mb-4" th:src="@{/lib/bootstrap-icons-1.10.3/box-arrow-in-left.svg}" alt="" width="72" height="57">
+                <h1 class="h3 mb-3 fw-normal">로그인</h1>
+
+                <div th:if="${param.error}" class="global-error">
+                    <p>Invalid username and password.</p>
+                </div>
+                <div th:if="${param.logout}">
+                    <p>You have been logged out.</p>
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="ID">
+                    <label for="username">ID</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    <label for="password">Password</label>
+                </div>
+
+                <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+                <div class="mt-3 mb-3">
+                    <a th:href="@{/signup}">가입하기</a>
+                </div>
+                <p class="mt-5 mb-3 text-muted">
+                    <div th:replace="~{fragments/footer :: footer}"></div>
+                </p>
+            </form>
+        </main>
+    </body>
+</html>
