@@ -18,6 +18,14 @@ public class PrincipalDetails implements UserDetails {
         return member.getId();
     }
 
+    public String getNickname() {
+        return member.getNickname();
+    }
+
+    public String getImageUrl() {
+        return member.getImageUrl();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

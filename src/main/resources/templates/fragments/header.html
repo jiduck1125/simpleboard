@@ -1,12 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="header">
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Simple Board</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <div th:fragment="header" class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                <span class="fs-4">Simple Board</span>
+            </a>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/lib/bootstrap-5.2.3-dist/css/bootstrap.min.css}">
-</head>
+            <div sec:authorize="isAnonymous()" class="col-md-3 text-end">
+                <button type="button" th:onclick="|location.href='@{/login}'|" class="btn btn-outline-primary me-2">Login</button>
+                <button type="button" th:onclick="|location.href='@{/signup}'|" class="btn btn-primary">Sign-up</button>
+            </div>
+
+            <div sec:authorize="isAuthenticated()" class="dropdown text-end">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img th:src="${#authentication.principal.imageUrl != null ?
+                        #authentication.principal.imageUrl : '/lib/bootstrap-icons-1.10.3/person.svg'}"
+                         alt="mdo" width="32" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small">
+                    <li><span sec:authentication="principal.nickname" class="dropdown-item"></span></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="dropdown-item">로그아웃</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+        </header>
+    </div>
 </html>

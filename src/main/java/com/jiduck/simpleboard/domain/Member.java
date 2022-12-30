@@ -30,7 +30,7 @@ public class Member {
     @Column(unique = true, length = 20)
     private String nickname;
 
-    private String image_url;
+    private String imageUrl;
 
     private String introduce;
 
@@ -39,12 +39,12 @@ public class Member {
     private LocalDateTime updateDate;
 
     @Builder
-    public Member(String username, String password, String email, String nickname, String image_url, String introduce, LocalDateTime createDate, LocalDateTime updateDate) {
+    public Member(String username, String password, String email, String nickname, String imageUrl, String introduce, LocalDateTime createDate, LocalDateTime updateDate) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.nickname = nickname;
-        this.image_url = image_url;
+        this.imageUrl = imageUrl;
         this.introduce = introduce;
         this.createDate = createDate;
         this.updateDate = updateDate;

@@ -18,7 +18,7 @@ public class MemberDto {
 
     private String nickname;
 
-    private String image_url;
+    private String imageUrl;
 
     private String introduce;
 
@@ -32,7 +32,7 @@ public class MemberDto {
                 .password(password)
                 .email(email)
                 .nickname(nickname)
-                .image_url(image_url)
+                .imageUrl(imageUrl)
                 .introduce(introduce)
                 .createDate(createDate)
                 .updateDate(updateDate)
