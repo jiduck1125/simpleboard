@@ -13,6 +13,8 @@ public class PostForm {
 
     private Long id;
 
+    private Long memberId;
+
     @NotBlank(message = "제목은 필수 입력입니다.")
     private String title;
 

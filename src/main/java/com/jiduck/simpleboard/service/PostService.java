@@ -5,8 +5,10 @@ import com.jiduck.simpleboard.domain.Post;
 import com.jiduck.simpleboard.dto.PostDto;
 import com.jiduck.simpleboard.repository.MemberRepository;
 import com.jiduck.simpleboard.repository.PostRepository;
+import com.jiduck.simpleboard.security.AuthenticationFacade;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
+    private final AuthenticationFacade authenticationFacade;
 
     @Transactional
     public Long createPost(Long memberId, PostDto postDto) {
@@ -42,6 +45,14 @@ public class PostService {
         return postRepository.findAllWithMember().stream()
                 .map(post -> new PostDto(post))
                 .collect(Collectors.toList());
+    }
+
+    public void checkAccessDeniedEx(Post post) {
+        if (authenticationFacade.getPrincipalDetails().getId() != post.getMember().getId()) {
+            String msg = "게시글 수정 권한이 없습니다. postId = " + post.getId() +
+                    " loginMemberId = " + authenticationFacade.getPrincipalDetails().getId();
+            throw new AccessDeniedException(msg);
+        }
     }
 
 }

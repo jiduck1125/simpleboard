@@ -8,6 +8,7 @@ import com.jiduck.simpleboard.service.AttachmentService;
 import com.jiduck.simpleboard.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -77,6 +78,7 @@ public class PostController {
 
         PostForm form = new PostForm();
         form.setId(post.getId());
+        form.setMemberId(post.getMember().getId());
         form.setTitle(post.getTitle());
         form.setContent(post.getContent());
 
@@ -88,6 +90,8 @@ public class PostController {
     public String updateForm(@PathVariable("postId") Long postId, Model model) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다. id = " + postId));
+
+        postService.checkAccessDeniedEx(post);
 
         PostForm form = new PostForm();
         form.setId(post.getId());
@@ -104,6 +108,11 @@ public class PostController {
         if (result.hasErrors()) {
             return "post/updateForm";
         }
+
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다. id = " + postId));
+
+        postService.checkAccessDeniedEx(post);
 
         PostDto postDto = new PostDto();
         postDto.setTitle(form.getTitle());

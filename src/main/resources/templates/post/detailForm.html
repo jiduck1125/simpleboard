@@ -19,7 +19,9 @@
                     <label for="hashtag" class="form-label">태그</label>
                     <input type="text" class="form-control-plaintext" th:field="*{hashtag}" id="hashtag" name="hashtag" readonly>
                 </div>
-                <button type="button" th:onclick="|location.href='@{/posts/{postId}/update (postId=${form.id})}'|" class="btn btn-primary">수정</button>
+                <button type="button" th:if="${#authentication.principal.id == form.memberId}"
+                        th:onclick="|location.href='@{/posts/{postId}/update (postId=${form.id})}'|"
+                        class="btn btn-primary">수정</button>
             </form>
         </div>
 

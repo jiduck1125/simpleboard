@@ -18,4 +18,9 @@ public class HomeController {
         return "login";
     }
 
+    @GetMapping("/denied")
+    public String accessDeniedForm() {
+        return "denied";
+    }
+
 }

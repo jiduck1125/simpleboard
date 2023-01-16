@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="~{fragments/head :: head}"></head>
+    <body>
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="container">
+            <h2>이 페이지에 접근 권한이 없습니다.</h2>
+            <a th:href="@{/}">홈으로 가기</a>
+        </div>
+
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
+    </body>
+</html>
