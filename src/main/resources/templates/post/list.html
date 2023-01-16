@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="~{fragments/head :: head}"></head>
+    <body>
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="container">
+            <h1>Hello World!</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">작성일자</th>
+                        <th scope="col">조회수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="post: ${posts}">
+                        <th th:text="${post.id}" scope="row"></th>
+                        <td>
+                            <a th:href="@{/posts/{postId} (postId=${post.id})}"><span th:text="${post.title}"></span></a>
+                        </td>
+                        <td th:text="${post.member.nickname}"></td>
+                        <td th:text="${post.writeDate}"></td>
+                        <td th:text="${post.viewCount}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
+    </body>
+</html>

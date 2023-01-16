@@ -2,6 +2,7 @@ package com.jiduck.simpleboard.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -34,4 +35,15 @@ public class Attachment {
     private String contentType;
 
     private LocalDateTime createDate;
+
+    @Builder
+    public Attachment(Post post, String originalFilename, String storedFilename, String extension, Long size, String contentType, LocalDateTime createDate) {
+        this.post = post;
+        this.originalFilename = originalFilename;
+        this.storedFilename = storedFilename;
+        this.extension = extension;
+        this.size = size;
+        this.contentType = contentType;
+        this.createDate = createDate;
+    }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragments/head :: head}"></head>
+    <body>
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="container">
+            <h1>새 게시글 쓰기</h1>
+            <form th:action="@{/post}" th:object="${postForm}" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">제목</label>
+                    <input type="text" class="form-control" th:field="*{title}" id="title" name="title"
+                           th:classappend="${#fields.hasErrors('title')}? 'is-invalid' : ''">
+                    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="invalid-feedback"
+                         id="invalidFeedbackTitle"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">내용</label>
+                    <textarea class="form-control" th:field="*{content}" id="content" name="content" rows="10"
+                              th:classappend="${#fields.hasErrors('content')}? 'is-invalid' : ''"></textarea>
+                    <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="invalid-feedback"
+                         id="invalidFeedbackContent"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="hashtag" class="form-label">태그</label>
+                    <input type="text" class="form-control" th:field="*{hashtag}" id="hashtag" name="hashtag">
+                </div>
+                <div class="mb-3">
+                    <label for="attachedFiles" class="form-label">첨부파일</label>
+                    <input class="form-control" type="file" id="attachedFiles" name="attachedFiles" multiple>
+                </div>
+                <button type="submit" class="btn btn-primary">저장</button>
+            </form>
+        </div>
+
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
+        <script th:src="@{/js/post/createForm.js}"></script>
+    </body>
+</html>

@@ -7,6 +7,10 @@
 
         <div class="container">
             <h1>Hello World!</h1>
+            <div sec:authorize="isAuthenticated()">
+                <button type="button" th:onclick="|location.href='@{/post}'|" class="btn btn-primary">글쓰기</button>
+                <button type="button" th:onclick="|location.href='@{/posts}'|" class="btn btn-outline-primary">게시글 조회</button>
+            </div>
         </div>
 
         <footer th:replace="~{fragments/footer :: footer}"></footer>

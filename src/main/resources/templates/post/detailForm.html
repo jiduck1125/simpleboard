@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{fragments/head :: head}"></head>
+    <body>
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="container">
+            <h1>게시글 상세</h1>
+            <form th:object="${form}" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">제목</label>
+                    <input type="text" class="form-control-plaintext" th:field="*{title}" id="title" name="title" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">내용</label>
+                    <textarea class="form-control-plaintext" th:field="*{content}" id="content" name="content" rows="10" readonly></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="hashtag" class="form-label">태그</label>
+                    <input type="text" class="form-control-plaintext" th:field="*{hashtag}" id="hashtag" name="hashtag" readonly>
+                </div>
+                <button type="button" th:onclick="|location.href='@{/posts/{postId}/update (postId=${form.id})}'|" class="btn btn-primary">수정</button>
+            </form>
+        </div>
+
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
+    </body>
+</html>
